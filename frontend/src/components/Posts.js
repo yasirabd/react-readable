@@ -49,9 +49,9 @@ const Vote = () => <div>Vote</div>
 const Edit = () => <div>Edit</div>
 const Delete = () => <div>Delete</div>
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({ post }) => {
   return {
-    posts: state.post
+    posts: post.post
   }
 }
 
