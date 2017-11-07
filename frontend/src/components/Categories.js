@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { getAllCategories } from '../utils/ReadableAPI'
+import { fetchCategories } from '../utils/ReadableAPI'
 
 class Categories extends Component {
 
@@ -9,7 +9,7 @@ class Categories extends Component {
   }
 
   componentDidMount() {
-    getAllCategories()
+    fetchCategories()
       .then(categories => {
         const items = categories.map(item => item.name)
         this.setState({ categories: items })

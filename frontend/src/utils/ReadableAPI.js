@@ -1,4 +1,4 @@
-const api = process.env.REACT_APP_READABLE_API_UTL || "http://localhost:3001"
+const api = process.env.REACT_APP_API_URL
 
 // get token
 let token = localStorage.token
@@ -13,10 +13,16 @@ const headers = {
 }
 
 // GET /categories
-export const getAllCategories = () => {
+export const fetchCategories = () => {
   return fetch(`${api}/categories`, { headers })
     .then(response => response.json())
     .then(data => data.categories)
+}
+
+// GET /posts
+export const getAllPosts = () => {
+  return fetch(`${api}/posts`, { headers })
+    .then(response => response.json())
 }
 
 // GET /:categories/posts
