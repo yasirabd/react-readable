@@ -7,6 +7,11 @@ const post = (state = { post: []}, action) => {
         ...state,
         post: action.posts
       }
+    case 'GET_POST_CATEGORY':
+      return {
+        ...state,
+        posts: action.posts
+      }
     default:
       return state
   }

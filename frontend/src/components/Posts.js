@@ -13,8 +13,14 @@ class Posts extends Component {
   }
 
   render() {
-    const { posts } = this.props
-    const postList = posts.map((post, index) => (<li key={index}><Post post={post} /></li>))
+    const { posts, match } = this.props
+    const postList = posts.filter(post => {
+      if(match.params.category) {
+        return post && post.category === match.params.category
+      } else {
+        return post
+      }
+    }).map((post, index) => (<li key={index}><Post post={post} /></li>))
 
     return(
       <div>

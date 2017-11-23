@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Link } from 'react-router-dom'
+import { Route, Link, Switch } from 'react-router-dom'
 import './App.css'
 
 import { withStyles } from 'material-ui/styles'
@@ -88,7 +88,10 @@ const App = (props: Props) => {
           <SideNav />
         </Drawer>
         <main className={classes.content}>
-          <Route path='/' component={Posts} />
+          <Switch>
+            <Route exact path='/' component={Posts} />
+            <Route exact path='/:category' component={Posts} />
+          </Switch>
         </main>
       </AppFrame>
     </Root>
