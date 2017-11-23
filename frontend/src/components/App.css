@@ -7,3 +7,35 @@
 .no-decor {
   text-decoration: none;
 }
+
+/** COLOR */
+.color-primary {
+  color: #3f51b5 !important;
+}
+
+/** SIDEBAR MENU */
+.menu-item {
+  text-decoration: none;
+}
+
+/** BUTTON */
+button .icon-button {
+  width: 15px;
+  height: 15px;
+  margin-right: 4px;
+}
+button .spinner-icon {
+  color: #fff;
+}
+
+.link-button {
+  text-decoration: none
+}
+
+.button-actions {
+  margin-top: 20px;
+}
+
+.button-actions button {
+  margin-right: 10px;
+}

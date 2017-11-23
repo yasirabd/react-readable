@@ -2,6 +2,11 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { fetchCategories, getAllPostsForCategoryAction } from '../actions'
+import { ListItem, ListItemIcon, ListItemText } from 'material-ui/List'
+import HomeIcon from 'material-ui-icons/Home'
+import FolderIcon from 'material-ui-icons/Folder'
+import Avatar from 'material-ui/Avatar'
+import Divider from 'material-ui/Divider'
 
 class Categories extends Component {
 
@@ -15,18 +20,22 @@ class Categories extends Component {
     const { categories } = this.props
     const list = categories.map((item, index) => {
       return (
-        <li key={index}>
-          <Link to={`/${item.name}`}>{item.name}</Link>
-        </li>
+        <Link to={`/${item.name}`} className='menu-item' key={item.name}>
+          <ListItem button>
+            <Avatar>
+              <FolderIcon />
+            </Avatar>
+            <ListItemText primary={item.name} />
+          </ListItem>
+        </Link>
       )
     })
 
     return (
       <div>
-        <ul>
-          <Home />
-          {list}
-        </ul>
+        <Home />
+        <Divider />
+        {list}
       </div>
     )
   }
@@ -34,9 +43,14 @@ class Categories extends Component {
 
 const Home = () => {
   return (
-    <li key='Home'>
-      <Link to='/'>Home</Link>
-    </li>
+    <Link to='/' className='menu-item'>
+      <ListItem button>
+        <ListItemIcon>
+          <HomeIcon className="color-primary" />
+        </ListItemIcon>
+        <ListItemText primary="Home" />
+      </ListItem>
+    </Link>
   )
 }
 
