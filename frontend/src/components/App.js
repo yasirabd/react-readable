@@ -10,7 +10,7 @@ import Typography from 'material-ui/Typography'
 import Divider from 'material-ui/Divider'
 
 import SideNav from './SideNav'
-import Posts from './Posts'
+import PostList from './PostList'
 
 import styled from 'styled-components'
 
@@ -89,8 +89,8 @@ const App = (props: Props) => {
         </Drawer>
         <main className={classes.content}>
           <Switch>
-            <Route exact path='/' component={Posts} />
-            <Route exact path='/:category' component={Posts} />
+            <Route exact path='/' component={PostList} />
+            <Route exact path='/:category' component={PostList} />
           </Switch>
         </main>
       </AppFrame>

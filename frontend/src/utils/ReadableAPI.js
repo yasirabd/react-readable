@@ -43,6 +43,18 @@ export const getAllPosts = () => {
 
 // POST /posts/:id
 // used for voting on a post
+export const votePost = (id, option) => {
+  return fetch(`${api}/posts/${id}`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      option: option
+    })
+  })
+}
 
 // PUT /posts/:id
 // edit the details of an existing post
