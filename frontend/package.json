@@ -4,7 +4,8 @@
   "private": true,
   "dependencies": {
     "axios": "^0.17.0",
-    "material-ui": "^0.19.4",
+    "material-ui": "^1.0.0-beta.21",
+    "material-ui-icons": "^1.0.0-beta.17",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-modal": "^3.1.0",
@@ -13,7 +14,8 @@
     "react-scripts": "1.0.17",
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "styled-components": "^2.2.3"
   },
   "scripts": {
     "start": "react-scripts start",
