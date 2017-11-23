@@ -18,6 +18,11 @@
   text-decoration: none;
 }
 
+ul {
+  list-style-type: none;
+  padding: 0px;
+}
+
 /** BUTTON */
 button .icon-button {
   width: 15px;
@@ -38,4 +43,29 @@ button .spinner-icon {
 
 .button-actions button {
   margin-right: 10px;
+}
+
+/* LIST */
+.list-item-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding: 16px;
+  margin-bottom: 10px;
+}
+
+.list-item-content {
+  flex-grow: 1
+}
+
+.list-item-actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-self: center;
+}
+
+.list-item-actions button {
+  margin-bottom: 7px;
+  width: 100px;
 }

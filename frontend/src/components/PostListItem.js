@@ -3,6 +3,13 @@ import { connect } from 'react-redux'
 import VoteUpDown from './VoteUpDown'
 import { upVoteAction, downVoteAction } from '../actions'
 
+import Paper from 'material-ui/Paper'
+import Typography from 'material-ui/Typography'
+import Button from 'material-ui/Button'
+import ModeEditIcon from 'material-ui-icons/ModeEdit'
+import DeleteIcon from 'material-ui-icons/Delete'
+import './PostListItem.css'
+
 class PostListItem extends Component {
 
   state = {
@@ -29,29 +36,29 @@ class PostListItem extends Component {
     const { score } = this.state
 
     return(
-      <div className="Post">
-        <Title title={title} />
-        <Author author={author} />
-        <Comments />
+      <Paper className='list-item-container post-list-item-container'>
         <VoteUpDown
           id={id}
           score={score}
           onClickUpVote={this.onClickUpVote}
           onClickDownVote={this.onClickDownVote}
         />
-        <Edit />
-        <Delete />
-      </div>
+        <div className='list-item-content post'>
+          <Typography type='headline'>{title}</Typography>
+          {author}
+        </div>
+        <div className='list-item-actions'>
+          <Button raised color='primary'>
+            <ModeEditIcon className='icon-button' /> Edit
+          </Button>
+          <Button raised color='accent'>
+            <DeleteIcon className='icon-button' /> Delete
+          </Button>
+        </div>
+      </Paper>
     )
   }
 }
-
-const Title = (props) => <div>{props.title}</div>
-const Author = (props) => <div>{props.author}</div>
-const Comments = () => <div>Comments</div>
-const Edit = () => <div>Edit</div>
-const Delete = () => <div>Delete</div>
-
 
 const mapDispatchToProps = (dispatch) => {
   return {
