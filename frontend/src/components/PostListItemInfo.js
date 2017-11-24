@@ -5,11 +5,10 @@ import AccessTimeIcon from 'material-ui-icons/AccessTime'
 import FolderIcon from 'material-ui-icons/Folder'
 import CommentIcon from 'material-ui-icons/Comment'
 
-class PostInfo extends Component {
+class PostListItemInfo extends Component {
 
   render() {
     const { author, category, date } = this.props
-    console.log(this.props)
 
     return (
       <div className='meta-container'>
@@ -26,4 +25,4 @@ class PostInfo extends Component {
   }
 }
 
-export default PostInfo
+export default PostListItemInfo

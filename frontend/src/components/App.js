@@ -11,6 +11,7 @@ import Divider from 'material-ui/Divider'
 
 import SideNav from './SideNav'
 import PostList from './PostList'
+import PostDetails from './PostDetails'
 
 import styled from 'styled-components'
 
@@ -91,6 +92,7 @@ const App = (props: Props) => {
           <Switch>
             <Route exact path='/' component={PostList} />
             <Route exact path='/:category' component={PostList} />
+            <Route exact path='/:category/:id' component={PostDetails} />
           </Switch>
         </main>
       </AppFrame>

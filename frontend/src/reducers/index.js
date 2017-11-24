@@ -1,5 +1,17 @@
 import { combineReducers } from 'redux'
 
+const post = (state = { post: {} }, action) => {
+  switch(action.type){
+    case 'GET_POST':
+      return {
+        ...state,
+        post: action.post,
+      }
+    default:
+      return state
+  }
+}
+
 const posts = (state = { posts: []}, action) => {
   switch(action.type) {
     case 'GET_POSTS':
@@ -44,6 +56,7 @@ const category = (state = { category: [] }, action) => {
 }
 
 export default combineReducers({
+  post,
   posts,
   category
 })

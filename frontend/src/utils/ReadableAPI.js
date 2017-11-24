@@ -20,7 +20,7 @@ export const getAllCategories = () => {
     .then(data => data.categories)
 }
 
-// GET /:categories/posts
+// GET /:category/posts
 // get all of the posts for a particular category
 export const getAllPostsForCategory = (category) => {
   return fetch(`${api}/${category}/posts`, { headers })
@@ -40,6 +40,10 @@ export const getAllPosts = () => {
 
 // GET /posts/:id
 // get the details of a single post
+export const getPost = (id) => {
+  return fetch(`${api}/posts/${id}`, { headers })
+    .then(response => response.json())
+}
 
 // POST /posts/:id
 // used for voting on a post

@@ -3,9 +3,11 @@ import {
   getAllCategories,
   getAllPostsForCategory,
   votePost,
+  getPost,
 } from '../utils/ReadableAPI'
 
 export const GET_POSTS = "GET_POSTS"
+export const GET_POST = "GET_POST"
 export const GET_POST_CATEGORY = "GET_POST_CATEGORY"
 export const CREATE_POST = "CREATE_POST"
 export const EDIT_POST = "EDIT_POST"
@@ -38,6 +40,14 @@ export const getAllPostsForCategoryAction = (category) => dispatch => (
 
 export const fetchPosts = () => dispatch => (
   getAllPosts().then(posts => dispatch(getPosts(posts)))
+)
+
+export const fetchPost = (id) => dispatch => (
+  getPost(id).then(post => {
+    dispatch({
+      type: GET_POST,
+      post,
+    })})
 )
 
 export const fetchCategories = () => dispatch => (

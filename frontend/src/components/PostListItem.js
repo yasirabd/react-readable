@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import VoteUpDown from './VoteUpDown'
 import { upVoteAction, downVoteAction } from '../actions'
 
@@ -10,7 +11,7 @@ import ModeEditIcon from 'material-ui-icons/ModeEdit'
 import DeleteIcon from 'material-ui-icons/Delete'
 import './PostListItem.css'
 
-import PostInfo from './PostInfo'
+import PostListItemInfo from './PostListItemInfo'
 
 class PostListItem extends Component {
 
@@ -46,8 +47,10 @@ class PostListItem extends Component {
           onClickDownVote={this.onClickDownVote}
         />
         <div className='list-item-content post'>
-          <Typography type='headline'>{title}</Typography>
-          <PostInfo
+          <Link to={`${category}/${id}`} className='no-decor'>
+              <Typography type='headline'>{title}</Typography>
+          </Link>
+          <PostListItemInfo
             author={author}
             date={timestamp}
             category={category} />
