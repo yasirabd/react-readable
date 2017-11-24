@@ -69,6 +69,10 @@ export const votePost = (id, option) => {
 
 // GET /posts/:id/comments
 // get all the comments for a single post
+export const getComments = (id) => {
+  return fetch(`${api}/posts/${id}/comments`, { headers })
+    .then(response => response.json())
+}
 
 // POST /comments
 // add a comment to a post

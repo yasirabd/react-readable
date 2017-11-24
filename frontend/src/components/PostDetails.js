@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchPost, upVoteAction, downVoteAction } from '../actions'
+import { fetchPost, upVoteAction, downVoteAction, fetchCommentsByPost } from '../actions'
 import VoteUpDown from './VoteUpDown'
 import PostListItemInfo from './PostListItemInfo'
+import CommentList from './CommentList'
 
 import Typography from 'material-ui/Typography'
 import Button from 'material-ui/Button'
@@ -15,6 +16,7 @@ class PostDetails extends Component {
   componentDidMount() {
     const { id } = this.props.match.params
     this.props.getPost(id)
+    this.props.getComments(id)
   }
 
   onClickDownVote = (id) => {
@@ -62,14 +64,16 @@ class PostDetails extends Component {
             </Button>
           </div>
         </div>
+        <CommentList comments={this.props.comments} />
       </div>
     )
   }
 }
 
-const mapStateToProps = ({ post }) => {
+const mapStateToProps = ({ post, comments }) => {
   return {
-    post: post
+    post: post,
+    comments: comments,
   }
 }
 
@@ -78,6 +82,7 @@ const mapDispatchToProps = (dispatch) => {
     getPost: (id) => dispatch(fetchPost(id)),
     upVote: (id) => dispatch(upVoteAction(id)),
     downVote: (id) => dispatch(downVoteAction(id)),
+    getComments: (id) => dispatch(fetchCommentsByPost(id)),
   }
 }
 

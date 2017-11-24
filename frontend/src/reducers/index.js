@@ -55,8 +55,21 @@ const category = (state = { category: [] }, action) => {
   }
 }
 
+const comments = (state = { comments: [] }, action) => {
+  switch(action.type) {
+    case 'GET_COMMENTS':
+      return {
+        ...state,
+        comments: action.comments
+      }
+    default:
+      return state
+  }
+}
+
 export default combineReducers({
   post,
   posts,
-  category
+  category,
+  comments,
 })

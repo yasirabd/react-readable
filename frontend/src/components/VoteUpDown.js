@@ -9,7 +9,6 @@ import './VoteUpDown.css'
 class VoteUpDown extends Component {
 
   render () {
-    console.log(this.props)
     return (
       <div className="vote-up-down">
         <IconButton

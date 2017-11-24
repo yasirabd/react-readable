@@ -4,6 +4,7 @@ import {
   getAllPostsForCategory,
   votePost,
   getPost,
+  getComments,
 } from '../utils/ReadableAPI'
 
 export const GET_POSTS = "GET_POSTS"
@@ -16,7 +17,7 @@ export const UPVOTE_POST = "UPVOTE_POST"
 export const DOWNVOTE_POST = "DOWNVOTE_POST"
 
 export const GET_CATEGORIES = "GET_CATEGORIES"
-
+export const GET_COMMENTS = "GET_COMMENTS"
 
 export const getPosts = (posts) => ({
   type: GET_POSTS,
@@ -70,6 +71,16 @@ export const downVoteAction = (id) => dispatch => (
       dispatch({
         type: 'DOWNVOTE_POST',
         id
+      })
+    })
+)
+
+export const fetchCommentsByPost = (id) => dispatch => (
+  getComments(id)
+    .then(comments => {
+      dispatch({
+        type: GET_COMMENTS,
+        comments,
       })
     })
 )
