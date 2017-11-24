@@ -8,6 +8,7 @@ import Typography from 'material-ui/Typography'
 import Button from 'material-ui/Button'
 import ModeEditIcon from 'material-ui-icons/ModeEdit'
 import DeleteIcon from 'material-ui-icons/Delete'
+import './PostDetails.css'
 
 class PostDetails extends Component {
 
@@ -28,28 +29,31 @@ class PostDetails extends Component {
     const { post } = this.props.post
     return(
       <div>
-        <div>
-          <VoteUpDown
-            id={post.id}
-            score={post.voteScore}
-            onClickUpVote={this.onClickUpVote}
-            onClickDownVote={this.onClickDownVote}
-          />
-          <Typography>
+        <div className="post-detail-container">
+          <div className="post-detail-voting">
+            <VoteUpDown
+              id={post.id}
+              score={post.voteScore}
+              onClickUpVote={this.onClickUpVote}
+              onClickDownVote={this.onClickDownVote}
+            />
+          </div>
+          <Typography type="display2" gutterBottom>
             {post.title}
           </Typography>
+
           <PostListItemInfo
             author={post.author}
             date={post.timestamp}
             category={post.category} />
 
-          <div>
-            <Typography>
+          <div className="post-detail-content">
+            <Typography type="body1" gutterBottom>
               {post.body}
             </Typography>
           </div>
 
-          <div>
+          <div className="button-actions">
             <Button raised color='primary'>
               <ModeEditIcon className='icon-button' /> Edit
             </Button>
