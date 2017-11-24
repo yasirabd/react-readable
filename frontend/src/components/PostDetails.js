@@ -9,6 +9,7 @@ import Typography from 'material-ui/Typography'
 import Button from 'material-ui/Button'
 import ModeEditIcon from 'material-ui-icons/ModeEdit'
 import DeleteIcon from 'material-ui-icons/Delete'
+import Divider from 'material-ui/Divider'
 import './PostDetails.css'
 
 class PostDetails extends Component {
@@ -64,7 +65,10 @@ class PostDetails extends Component {
             </Button>
           </div>
         </div>
-        <CommentList comments={this.props.comments} />
+        <Divider />
+        <div className='post-detail-comment-list'>
+          <CommentList comments={this.props.comments} />
+        </div>
       </div>
     )
   }

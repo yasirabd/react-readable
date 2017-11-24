@@ -17,7 +17,7 @@ class PostList extends Component {
       } else {
         return post
       }
-    }).map((post, index) => (<li key={index}><PostListItem post={post} /></li>))
+    }).map(post => (<PostListItem key={post.id} post={post} />))
 
     return(
       <div>

@@ -3,11 +3,6 @@
   color: #fff !important;
 }
 
-/* MISC */
-.no-decor {
-  text-decoration: none;
-}
-
 /** COLOR */
 .color-primary {
   color: #3f51b5 !important;
@@ -18,9 +13,13 @@
   text-decoration: none;
 }
 
-ul {
-  list-style-type: none;
-  padding: 0px;
+/** POST LIST */
+.sort-select-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
 /** BUTTON */
@@ -43,6 +42,12 @@ button .spinner-icon {
 
 .button-actions button {
   margin-right: 10px;
+}
+
+/* FORM */
+.form-group {
+  display: flex;
+  flex-direction: row;
 }
 
 /* LIST */
@@ -92,4 +97,9 @@ button .spinner-icon {
   width: 15px;
   height: 15px;
   margin-right: 4px;
+}
+
+/* MISC */
+.no-decor {
+  text-decoration: none;
 }
