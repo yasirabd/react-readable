@@ -10,6 +10,8 @@ import ModeEditIcon from 'material-ui-icons/ModeEdit'
 import DeleteIcon from 'material-ui-icons/Delete'
 import './PostListItem.css'
 
+import PostInfo from './PostInfo'
+
 class PostListItem extends Component {
 
   state = {
@@ -32,7 +34,7 @@ class PostListItem extends Component {
   }
 
   render() {
-    const { title, author, id } = this.props.post
+    const { title, author, id, timestamp, category } = this.props.post
     const { score } = this.state
 
     return(
@@ -45,7 +47,10 @@ class PostListItem extends Component {
         />
         <div className='list-item-content post'>
           <Typography type='headline'>{title}</Typography>
-          {author}
+          <PostInfo
+            author={author}
+            date={timestamp}
+            category={category} />
         </div>
         <div className='list-item-actions'>
           <Button raised color='primary'>

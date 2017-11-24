@@ -69,3 +69,27 @@ button .spinner-icon {
   margin-bottom: 7px;
   width: 100px;
 }
+
+/* META */
+.meta-container {
+  color: #666;
+  font-size: 14px;
+  margin-top: 7px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.meta-container .meta-item {
+  padding-right: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.meta-container .meta-icon {
+  width: 15px;
+  height: 15px;
+  margin-right: 4px;
+}
