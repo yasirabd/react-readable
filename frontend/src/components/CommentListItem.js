@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import { dateTimeFormat } from '../utils/date'
+import { connect } from 'react-redux'
+import { upVoteCommentAction, downVoteCommentAction } from '../actions'
+import VoteUpDown from './VoteUpDown'
 
 import Paper from 'material-ui/Paper'
 import AccountCircleIcon from 'material-ui-icons/AccountCircle'
@@ -10,13 +13,29 @@ import Button from 'material-ui/Button'
 import './CommentListItem.css'
 
 class CommentListItem extends Component {
+  state = {
+    score: 0,
+  }
+
+  onClickUpVote = (id) => {
+    this.props.upVoteComment(id)
+  }
+
+  onClickDownVote = (id) => {
+    this.props.downVoteComment(id)
+  }
 
   render () {
     const { comment } = this.props
-
+    console.log(comment)
     return(
       <Paper className='list-item-container'>
-        <div>Vote</div>
+        <VoteUpDown
+          id={comment.id}
+          score={comment.voteScore}
+          onClickUpVote={this.onClickUpVote}
+          onClickDownVote={this.onClickDownVote}
+        />
         <div className='list-item-content'>
           <div className='meta-container'>
             <span className="meta-item">
@@ -46,4 +65,11 @@ class CommentListItem extends Component {
   }
 }
 
-export default CommentListItem
+const mapDispatchToProps = (dispatch) => {
+  return {
+    upVoteComment: (id) => dispatch(upVoteCommentAction(id)),
+    downVoteComment: (id) => dispatch(downVoteCommentAction(id)),
+  }
+}
+
+export default connect(null, mapDispatchToProps)(CommentListItem)

@@ -82,6 +82,18 @@ export const getComments = (id) => {
 
 // POST /comments/:id
 // used fot voting on a comment
+export const voteComment = (id, option) => {
+  return fetch(`${api}/comments/${id}`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      option: option
+    })
+  }).then(data => data.json())
+}
 
 // PUT /comments/:id
 // edit the details of an existing comment

@@ -1,22 +1,22 @@
 import React, { Component } from 'react'
 import CommentListItem from './CommentListItem'
-import Typography from 'material-ui/Typography'
 
 class CommentList extends Component {
 
   render() {
-    const { comments } = this.props.comments
 
+    let commentList = null
+
+    if (this.props.comments) {
+      commentList = this.props.comments.map(comment => (
+        <CommentListItem
+          key={comment.id}
+          comment={comment} />
+      ))
+    }
     return(
       <div>
-        {comments.length > 0
-          ? (comments.map(comment => (
-            <CommentListItem
-              key={comment.id}
-              comment={comment} />
-            )))
-          : <Typography>No comments to display</Typography>
-        }
+        {commentList}
       </div>
     )
   }

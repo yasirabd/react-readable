@@ -5,24 +5,18 @@ import {
   votePost,
   getPost,
   getComments,
+  voteComment,
 } from '../utils/ReadableAPI'
 
-export const GET_POSTS = "GET_POSTS"
-export const GET_POST = "GET_POST"
-export const GET_POST_CATEGORY = "GET_POST_CATEGORY"
-export const CREATE_POST = "CREATE_POST"
-export const EDIT_POST = "EDIT_POST"
-export const DELETE_POST = "DELETE_POST"
-export const UPVOTE_POST = "UPVOTE_POST"
-export const DOWNVOTE_POST = "DOWNVOTE_POST"
+const GET_POSTS = "GET_POSTS"
+const GET_POST = "GET_POST"
+const GET_POST_CATEGORY = "GET_POST_CATEGORY"
+const UPVOTE_POST = "UPVOTE_POST"
+const DOWNVOTE_POST = "DOWNVOTE_POST"
+const GET_CATEGORIES = "GET_CATEGORIES"
+const UPVOTE_COMMENT = "UPVOTE_COMMENT"
+const DOWNVOTE_COMMENT = "DOWNVOTE_COMMENT"
 
-export const GET_CATEGORIES = "GET_CATEGORIES"
-export const GET_COMMENTS = "GET_COMMENTS"
-
-export const getPosts = (posts) => ({
-  type: GET_POSTS,
-  posts
-})
 
 export const getCategories = (categories) => ({
   type: GET_CATEGORIES,
@@ -40,15 +34,33 @@ export const getAllPostsForCategoryAction = (category) => dispatch => (
 )
 
 export const fetchPosts = () => dispatch => (
-  getAllPosts().then(posts => dispatch(getPosts(posts)))
+  getAllPosts()
+    .then(posts => {
+      posts.map(post => {
+        getComments(post.id)
+          .then(comments => {
+            dispatch({
+              type: GET_POSTS,
+              post,
+              comments,
+            })
+          })
+      })
+    })
 )
 
 export const fetchPost = (id) => dispatch => (
-  getPost(id).then(post => {
-    dispatch({
-      type: GET_POST,
-      post,
-    })})
+  getPost(id)
+    .then(post => {
+      getComments(post.id)
+        .then(comments => {
+          dispatch({
+            type: GET_POST,
+            post,
+            comments,
+          })
+        })
+    })
 )
 
 export const fetchCategories = () => dispatch => (
@@ -59,7 +71,7 @@ export const upVoteAction = (id) => dispatch => (
   votePost(id, 'upVote')
     .then(() => {
       dispatch({
-        type: 'UPVOTE_POST',
+        type: UPVOTE_POST,
         id
       })
     })
@@ -69,18 +81,32 @@ export const downVoteAction = (id) => dispatch => (
   votePost(id, 'downVote')
     .then(() => {
       dispatch({
-        type: 'DOWNVOTE_POST',
+        type: DOWNVOTE_POST,
         id
       })
     })
 )
 
-export const fetchCommentsByPost = (id) => dispatch => (
-  getComments(id)
-    .then(comments => {
+export const upVoteCommentAction = (id) => dispatch => (
+  voteComment(id, 'upVote')
+    .then((comment) => {
       dispatch({
-        type: GET_COMMENTS,
-        comments,
+        type: UPVOTE_COMMENT,
+        id: comment.id,
+        parentId: comment.parentId,
+        voteScore: comment.voteScore,
+      })
+    })
+)
+
+export const downVoteCommentAction = (id) => dispatch => (
+  voteComment(id, 'downVote')
+    .then((comment) => {
+      dispatch({
+        type: DOWNVOTE_COMMENT,
+        id: comment.id,
+        parentId: comment.parentId,
+        voteScore: comment.voteScore,
       })
     })
 )
