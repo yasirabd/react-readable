@@ -37,7 +37,7 @@ export const getAllPostsForCategoryAction = (category) => dispatch => (
 export const fetchPosts = () => dispatch => (
   getAllPosts()
     .then(posts => {
-      posts.map(post => {
+      posts.forEach(post => {
         getComments(post.id)
           .then(comments => {
             dispatch({

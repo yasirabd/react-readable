@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import VoteUpDown from './VoteUpDown'
@@ -89,7 +89,7 @@ type Props = {
 }
 
 const PostListItem = (props: Props) => {
-  const { id, title, author, timestamp, category, voteScore } = props.post;
+  const { id, title, author, timestamp, category, commentCount, voteScore } = props.post;
 
   return (
     <Paper className='list-item-container post-list-item-container'>
@@ -106,13 +106,14 @@ const PostListItem = (props: Props) => {
         <PostListItemInfo
           author={author}
           date={timestamp}
+          commentCount={commentCount}
           category={category} />
       </div>
       <div className='list-item-actions'>
         <Button raised color='primary'>
           <ModeEditIcon className='icon-button' /> Edit
         </Button>
-        <Button raised color='accent'>
+        <Button raised color='secondary'>
           <DeleteIcon className='icon-button' /> Delete
         </Button>
       </div>

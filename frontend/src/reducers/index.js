@@ -9,7 +9,7 @@ const post = (state = { post: {} }, action) => {
         post: action.post
       }
     case 'UPVOTE_POST_SUCCESS':
-      if(state.id != action.id) {
+      if(state.id !== action.id) {
         return state
       }
       return {
@@ -17,7 +17,7 @@ const post = (state = { post: {} }, action) => {
         voteScore: state.voteScore + 1
       }
     case 'DOWNVOTE_POST_SUCCESS':
-      if(state.id != action.id) {
+      if(state.id !== action.id) {
         return state
       }
       return {
