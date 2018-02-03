@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchPost, upVoteAction, downVoteAction } from '../actions'
+import { fetchPost, upVotePostAction, downVotePostAction } from '../actions'
 import VoteUpDown from './VoteUpDown'
 import PostListItemInfo from './PostListItemInfo'
 import CommentList from './CommentList'
@@ -19,16 +19,8 @@ class PostDetails extends Component {
     this.props.getPost(id)
   }
 
-  onClickDownVote = (id) => {
-    this.props.downVote(id)
-  }
-
-  onClickUpVote = (id) => {
-    this.props.upVote(id)
-  }
-
   render(){
-    const { post } = this.props.post
+    const { post, onUpVotePost, onDownVotePost } = this.props.post
     const { comments } = this.props.post.post
     return(
       <div>
@@ -37,8 +29,8 @@ class PostDetails extends Component {
             <VoteUpDown
               id={post.id}
               score={post.voteScore}
-              onClickUpVote={this.onClickUpVote}
-              onClickDownVote={this.onClickDownVote}
+              onClickUpVote={() => onUpVotePost(post.id)}
+              onClickDownVote={() => onDownVotePost(post.id)}
             />
           </div>
           <Typography type="display2" gutterBottom>
@@ -83,8 +75,8 @@ const mapStateToProps = ({ post }) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getPost: (id) => dispatch(fetchPost(id)),
-    upVote: (id) => dispatch(upVoteAction(id)),
-    downVote: (id) => dispatch(downVoteAction(id)),
+    onUpVotePost: (id) => dispatch(upVotePostAction(id)),
+    onDownVotePost: (id) => dispatch(downVotePostAction(id)),
   }
 }
 

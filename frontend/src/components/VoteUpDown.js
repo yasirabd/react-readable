@@ -9,11 +9,12 @@ import './VoteUpDown.css'
 class VoteUpDown extends Component {
 
   render () {
+    console.log(this.props)
     return (
       <div className="vote-up-down">
         <IconButton
           aria-label="Vote up"
-          onClick={() => this.props.onClickUpVote(this.props.id)}
+          onClick={this.props.onClickUpVote}
           className="vote-icon">
           <ArrowUpIcon />
         </IconButton>
@@ -22,7 +23,7 @@ class VoteUpDown extends Component {
         </Avatar>
         <IconButton
           aria-label="Vote down"
-          onClick={() => this.props.onClickDownVote(this.props.id)}
+          onClick={this.props.onClickDownVote}
           className="vote-icon">
           <ArrowDownIcon />
         </IconButton>

@@ -8,6 +8,22 @@ const post = (state = { post: {} }, action) => {
         ...state,
         post: action.post
       }
+    case 'UPVOTE_POST_SUCCESS':
+      if(state.id != action.id) {
+        return state
+      }
+      return {
+        ...state,
+        voteScore: state.voteScore + 1
+      }
+    case 'DOWNVOTE_POST_SUCCESS':
+      if(state.id != action.id) {
+        return state
+      }
+      return {
+        ...state,
+        voteScore: state.voteScore - 1
+      }
     case 'UPVOTE_COMMENT':
       const upVoteComments = [...state.post.comments]
       const indexUpComment = upVoteComments.findIndex(comment => comment.id === action.id)
@@ -55,20 +71,9 @@ const posts = (state = { posts: []}, action) => {
         ...state,
         posts: action.posts
       }
-    case 'UPVOTE_POST':
-      const currentPostUpVote = [...state.posts]
-      const indexUp = currentPostUpVote.findIndex(post => post.id === action.id)
-      currentPostUpVote[indexUp].voteScore = currentPostUpVote[indexUp].voteScore + 1
-      return {
-        posts: [...currentPostUpVote]
-      }
-    case 'DOWNVOTE_POST':
-      const currentPostDownVote = [...state.posts]
-      const indexDown = currentPostDownVote.findIndex(post => post.id === action.id)
-      currentPostDownVote[indexDown].voteScore = currentPostDownVote[indexDown].voteScore - 1
-      return {
-        posts: [...currentPostDownVote]
-      }
+    case 'UPVOTE_POST_SUCCESS':
+    case 'DOWNVOTE_POST_SUCCESS':
+      return state.map(p => post(p, action))
     default:
       return state
   }

@@ -8,6 +8,9 @@ import Toolbar from 'material-ui/Toolbar'
 import Drawer from 'material-ui/Drawer'
 import Typography from 'material-ui/Typography'
 import Divider from 'material-ui/Divider'
+import Tooltip from 'material-ui/Tooltip'
+import Button from 'material-ui/Button'
+import AddIcon from 'material-ui-icons/Add'
 
 import SideNav from './SideNav'
 import PostList from './PostList'
@@ -62,6 +65,11 @@ const styles = theme => ({
       marginTop: 64,
     },
   },
+  addButton: {
+    position: 'fixed',
+    bottom: '20px',
+    right: '20px',
+  },
 })
 
 type Props = {
@@ -89,11 +97,13 @@ const App = (props: Props) => {
           <SideNav />
         </Drawer>
         <main className={classes.content}>
-          <Switch>
-            <Route exact path='/' component={PostList} />
-            <Route exact path='/:category' component={PostList} />
-            <Route exact path='/:category/:id' component={PostDetails} />
-          </Switch>
+          <div>
+            <Switch>
+              <Route exact path='/' component={PostList} />
+              <Route exact path='/:category' component={PostList} />
+              <Route exact path='/:category/:id' component={PostDetails} />
+            </Switch>
+          </div>
         </main>
       </AppFrame>
     </Root>

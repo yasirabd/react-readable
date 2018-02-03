@@ -47,18 +47,19 @@ export const getPost = (id) => {
 
 // POST /posts/:id
 // used for voting on a post
-export const votePost = (id, option) => {
+export const votePost = (option) => (id) => {
   return fetch(`${api}/posts/${id}`, {
     method: 'POST',
     headers: {
       ...headers,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({
-      option: option
-    })
-  })
+    body: JSON.stringify({ option })
+  }).then(res => res.json())
 }
+
+export const upVotePost = votePost('upvote')
+export const downVotePost = votePost('downVote')
 
 // PUT /posts/:id
 // edit the details of an existing post

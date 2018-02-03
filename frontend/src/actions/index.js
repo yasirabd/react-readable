@@ -2,7 +2,8 @@ import {
   getAllPosts,
   getAllCategories,
   getAllPostsForCategory,
-  votePost,
+  upVotePost,
+  downVotePost,
   getPost,
   getComments,
   voteComment,
@@ -11,8 +12,8 @@ import {
 const GET_POSTS = "GET_POSTS"
 const GET_POST = "GET_POST"
 const GET_POST_CATEGORY = "GET_POST_CATEGORY"
-const UPVOTE_POST = "UPVOTE_POST"
-const DOWNVOTE_POST = "DOWNVOTE_POST"
+const UPVOTE_POST_SUCCESS = "UPVOTE_POST_SUCCESS"
+const DOWNVOTE_POST_SUCCESS = "DOWNVOTE_POST_SUCCESS"
 const GET_CATEGORIES = "GET_CATEGORIES"
 const UPVOTE_COMMENT = "UPVOTE_COMMENT"
 const DOWNVOTE_COMMENT = "DOWNVOTE_COMMENT"
@@ -67,25 +68,47 @@ export const fetchCategories = () => dispatch => (
   getAllCategories().then(categories =>dispatch(getCategories(categories)))
 )
 
-export const upVoteAction = (id) => dispatch => (
-  votePost(id, 'upVote')
-    .then(() => {
-      dispatch({
-        type: UPVOTE_POST,
-        id
-      })
-    })
+// export const upVoteAction = (id) => dispatch => (
+//   votePost(id, 'upVote')
+//     .then(() => {
+//       dispatch({
+//         type: UPVOTE_POST,
+//         id
+//       })
+//     })
+// )
+
+export const upVotePostAction = (id) => (dispatch) => (
+  upVotePost(id).then(({ id }) => dispatch(upVotePostSuccess(id)))
 )
 
-export const downVoteAction = (id) => dispatch => (
-  votePost(id, 'downVote')
-    .then(() => {
-      dispatch({
-        type: DOWNVOTE_POST,
-        id
-      })
-    })
+const upVotePostSuccess = (id) => {
+  return {
+    type: UPVOTE_POST_SUCCESS,
+    id
+  }
+}
+
+// export const downVoteAction = (id) => dispatch => (
+//   votePost(id, 'downVote')
+//     .then(() => {
+//       dispatch({
+//         type: DOWNVOTE_POST,
+//         id
+//       })
+//     })
+// )
+
+export const downVotePostAction = (id) => (dispatch) => (
+  downVotePost(id).then(({ id }) => dispatch(downVotePostSuccess(id)))
 )
+
+const downVotePostSuccess = (id) => {
+  return {
+    type: DOWNVOTE_POST_SUCCESS,
+    id
+  }
+}
 
 export const upVoteCommentAction = (id) => dispatch => (
   voteComment(id, 'upVote')
