@@ -1,6 +1,9 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
+import VoteUpDown from './VoteUpDown'
 import { dateTimeFormat } from '../utils/date'
+import { upVoteComment, downVoteComment } from '../actions'
 
 import Paper from 'material-ui/Paper'
 import AccountCircleIcon from 'material-ui-icons/AccountCircle'
@@ -10,9 +13,14 @@ import DeleteIcon from 'material-ui-icons/Delete'
 import Button from 'material-ui/Button'
 import './CommentListItem.css'
 
-const CommentListItem = ({ id, body, author, timestamp, voteScore }) => {
+const CommentListItem = ({ id, body, author, timestamp, voteScore, onUpVoteComment, onDownVoteComment }) => {
   return (
     <Paper className='list-item-container'>
+      <VoteUpDown
+        voteScore={voteScore}
+        onUpVote={() => onUpVoteComment(id)}
+        onDownVote={() => onDownVoteComment(id)}
+      />
 
       <div className='list-item-content'>
         <div className='meta-container'>
@@ -42,4 +50,7 @@ const CommentListItem = ({ id, body, author, timestamp, voteScore }) => {
   )
 }
 
-export default CommentListItem
+export default connect(
+  undefined,
+  { onUpVoteComment: upVoteComment, onDownVoteComment: downVoteComment }
+)(CommentListItem)
