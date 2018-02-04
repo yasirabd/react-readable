@@ -34,7 +34,7 @@ const CommentListItem = ({ id, body, author, timestamp, voteScore }) => {
         <Button raised color='primary'>
           <ModeEditIcon className='icon-button' /> Edit
         </Button>
-        <Button raised color='accent'>
+        <Button raised color='secondary'>
           <DeleteIcon className='icon-button' /> Delete
         </Button>
       </div>

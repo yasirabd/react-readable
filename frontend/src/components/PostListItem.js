@@ -21,7 +21,7 @@ const PostListItem = ({ id, title, author, timestamp, category, commentCount, vo
       voteScore={voteScore}
     />
     <div className='list-item-content post'>
-      <Link to={`${category}/${id}`} className='no-decor'>
+      <Link to={`/posts/${id}`} className='no-decor'>
           <Typography type='headline'>{title}</Typography>
       </Link>
       <PostListItemInfo
