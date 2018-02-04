@@ -1,44 +1,24 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { fetchPosts } from '../actions'
+import React from 'react'
 import PostListItem from './PostListItem'
 
-class PostList extends Component {
+const conditionalRender = (WrappedComponent) => ({ posts, ...props }) => (
+  posts.length === 0
+  ? <WrappedComponent>
+      <p><em>No Posts to Display!</em></p>
+    </WrappedComponent>
+  : <WrappedComponent {...props}>
+      {posts.map(
+        post => <PostListItem key={post.id} {...post} />
+      )}
+    </WrappedComponent>
+)
 
-  componentDidMount() {
-    this.props.getPosts()
-  }
+const PostList = ({ children }) => (
+  <div>
+    <ul>
+      {children}
+    </ul>
+  </div>
+)
 
-  render() {
-    const { posts, match } = this.props
-    const postList = posts.filter(post => {
-      if(match.params.category) {
-        return post && post.category === match.params.category
-      } else {
-        return post
-      }
-    }).map(post => (<PostListItem key={post.id} post={post} />))
-
-    return(
-      <div>
-        <ul>
-          {postList}
-        </ul>
-      </div>
-    )
-  }
-}
-
-const mapStateToProps = ({ posts }) => {
-  return {
-    posts: posts.posts,
-  }
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getPosts: () => dispatch(fetchPosts()),
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(PostList)
+export default conditionalRender(PostList)

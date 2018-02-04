@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 import IconButton from 'material-ui/IconButton'
 import Avatar from 'material-ui/Avatar'
@@ -6,30 +6,24 @@ import ArrowUpIcon from 'material-ui-icons/ArrowUpward'
 import ArrowDownIcon from 'material-ui-icons/ArrowDownward'
 import './VoteUpDown.css'
 
-class VoteUpDown extends Component {
-
-  render () {
-    console.log(this.props)
-    return (
-      <div className="vote-up-down">
-        <IconButton
-          aria-label="Vote up"
-          onClick={this.props.onClickUpVote}
-          className="vote-icon">
-          <ArrowUpIcon />
-        </IconButton>
-        <Avatar className={this.props.score >= 0 ? 'vote-score-positive' : 'vote-score-negative'}>
-          <span>{this.props.score}</span>
-        </Avatar>
-        <IconButton
-          aria-label="Vote down"
-          onClick={this.props.onClickDownVote}
-          className="vote-icon">
-          <ArrowDownIcon />
-        </IconButton>
-      </div>
-    )
-  }
-}
+const VoteUpDown = ({ voteScore, onUpVote, onDownVote }) => (
+  <div className="vote-up-down">
+    <IconButton
+      aria-label="Vote up"
+      onClick={onUpVote}
+      className="vote-icon">
+      <ArrowUpIcon />
+    </IconButton>
+    <Avatar className={voteScore >= 0 ? 'vote-score-positive' : 'vote-score-negative'}>
+      <span>{voteScore}</span>
+    </Avatar>
+    <IconButton
+      aria-label="Vote down"
+      onClick={onDownVote}
+      className="vote-icon">
+      <ArrowDownIcon />
+    </IconButton>
+  </div>
+)
 
 export default VoteUpDown

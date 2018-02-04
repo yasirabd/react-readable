@@ -1,18 +1,18 @@
-import React from 'react';
-import { Route, Link, Switch } from 'react-router-dom'
-import './App.css'
+import React, { Component } from 'react';
+import { connect } from 'react-redux'
+import { withRouter, Link } from 'react-router-dom'
 
+import { getAllCategories, getAllPostsAndComments } from '../actions'
+import SideNav from './SideNav'
+import Content from './Content'
+
+import './App.css'
 import { withStyles } from 'material-ui/styles'
 import AppBar from 'material-ui/AppBar'
 import Toolbar from 'material-ui/Toolbar'
 import Drawer from 'material-ui/Drawer'
 import Typography from 'material-ui/Typography'
 import Divider from 'material-ui/Divider'
-
-import SideNav from './SideNav'
-import PostList from './PostList'
-import PostDetails from './PostDetails'
-
 import styled from 'styled-components'
 
 const drawerWidth = '240px'
@@ -69,42 +69,41 @@ const styles = theme => ({
   },
 })
 
-type Props = {
-  classes: any,
+class App extends Component {
+  componentDidMount() {
+    this.props.fetchCategories()
+    this.props.fetchPostsAndComments()
+  }
+
+  render() {
+    const { classes } = this.props
+    return (
+      <Root>
+        <AppFrame>
+          <OverrideAppBar>
+            <Toolbar>
+              <Link to='/' className='no-decor'>
+                <Typography type='title' noWrap className='app-bar-title'>
+                  READABLE
+                </Typography>
+              </Link>
+            </Toolbar>
+          </OverrideAppBar>
+          <Drawer type='permanent' classes={{ paper: classes.drawerPaper }}>
+            <div className={classes.drawerHeader} />
+            <Divider />
+            <SideNav />
+          </Drawer>
+          <main className={classes.content}>
+            <Content />
+          </main>
+        </AppFrame>
+      </Root>
+    )
+  }
 }
 
-const App = (props: Props) => {
-  const { classes } = props
-
-  return (
-    <Root>
-      <AppFrame>
-        <OverrideAppBar>
-          <Toolbar>
-            <Link to='/' className='no-decor'>
-              <Typography type='title' noWrap className='app-bar-title'>
-                READABLE
-              </Typography>
-            </Link>
-          </Toolbar>
-        </OverrideAppBar>
-        <Drawer type='permanent' classes={{ paper: classes.drawerPaper }}>
-          <div className={classes.drawerHeader} />
-          <Divider />
-          <SideNav />
-        </Drawer>
-        <main className={classes.content}>
-          <div>
-            <Switch>
-              <Route exact path='/' component={PostList} />
-              <Route exact path='/:category' component={PostList} />
-              <Route exact path='/:category/:id' component={PostDetails} />
-            </Switch>
-          </div>
-        </main>
-      </AppFrame>
-    </Root>
-  )
-}
-
-export default withStyles(styles)(App);
+App = withStyles(styles)(App)
+export default withRouter(connect(undefined,
+  { fetchCategories: getAllCategories, fetchPostsAndComments: getAllPostsAndComments }
+)(App))

@@ -1,86 +1,35 @@
-import {
-  getAllPosts,
-  getAllCategories,
-  getAllPostsForCategory,
-  upVotePost,
-  downVotePost,
-  getPost,
-  getComments,
-  voteComment,
-} from '../utils/ReadableAPI'
+import * as api from '../utils/ReadableAPI'
+import { wait } from '../utils/helper'
 
-const GET_POSTS = "GET_POSTS"
-const GET_POST = "GET_POST"
-const GET_POST_CATEGORY = "GET_POST_CATEGORY"
-const UPVOTE_POST_SUCCESS = "UPVOTE_POST_SUCCESS"
-const DOWNVOTE_POST_SUCCESS = "DOWNVOTE_POST_SUCCESS"
-const GET_CATEGORIES = "GET_CATEGORIES"
-const UPVOTE_COMMENT = "UPVOTE_COMMENT"
-const DOWNVOTE_COMMENT = "DOWNVOTE_COMMENT"
+export const GET_ALL_POSTS_SUCCESS = "GET_ALL_POSTS_SUCCESS"
+export const UPVOTE_POST_SUCCESS = "UPVOTE_POST_SUCCESS"
+export const DOWNVOTE_POST_SUCCESS = "DOWNVOTE_POST_SUCCESS"
+export const GET_ALL_COMMENTS_SUCCESS = "GET_ALL_COMMENTS_SUCCESS"
+export const UPVOTE_COMMENT_SUCCESS = "UPVOTE_COMMENT_SUCCESS"
+export const DOWNVOTE_COMMENT_SUCCESS = "DOWNVOTE_COMMENT_SUCCESS"
+export const GET_ALL_CATEGORIES_SUCCESS = "GET_ALL_CATEGORIES_SUCCESS"
+export const SET_SORT_BY = "SET_SORT_BY"
 
-
-export const getCategories = (categories) => ({
-  type: GET_CATEGORIES,
-  categories
-})
-
-export const getAllPostsForCategoryAction = (category) => dispatch => (
-  getAllPostsForCategory(category)
-    .then((posts) => {
-      dispatch({
-        type: GET_POST_CATEGORY,
-        posts
-      })
-    })
-)
-
-export const fetchPosts = () => dispatch => (
-  getAllPosts()
+export const getAllPostsAndComments = () => (dispatch) => {
+  wait(2000)
+    .then(() => api.getPosts())
     .then(posts => {
-      posts.forEach(post => {
-        getComments(post.id)
-          .then(comments => {
-            dispatch({
-              type: GET_POSTS,
-              post,
-              comments,
-            })
-          })
-      })
+      dispatch(getAllPostsSuccess(posts))
+      posts.map(({ id }) => dispatch(getAllComments(id)))
     })
-)
+}
 
-export const fetchPost = (id) => dispatch => (
-  getPost(id)
-    .then(post => {
-      getComments(post.id)
-        .then(comments => {
-          dispatch({
-            type: GET_POST,
-            post,
-            comments,
-          })
-        })
-    })
-)
+const getAllPostsSuccess = (posts) => {
+  return {
+    type: GET_ALL_POSTS_SUCCESS,
+    posts
+  }
+}
 
-export const fetchCategories = () => dispatch => (
-  getAllCategories().then(categories =>dispatch(getCategories(categories)))
-)
-
-// export const upVoteAction = (id) => dispatch => (
-//   votePost(id, 'upVote')
-//     .then(() => {
-//       dispatch({
-//         type: UPVOTE_POST,
-//         id
-//       })
-//     })
-// )
-
-export const upVotePostAction = (id) => (dispatch) => (
-  upVotePost(id).then(({ id }) => dispatch(upVotePostSuccess(id)))
-)
+export const upVotePost = (id) => (dispatch) => {
+  api.upVotePost(id)
+    .then(({ id }) => dispatch(upVotePostSuccess(id)));
+}
 
 const upVotePostSuccess = (id) => {
   return {
@@ -89,19 +38,10 @@ const upVotePostSuccess = (id) => {
   }
 }
 
-// export const downVoteAction = (id) => dispatch => (
-//   votePost(id, 'downVote')
-//     .then(() => {
-//       dispatch({
-//         type: DOWNVOTE_POST,
-//         id
-//       })
-//     })
-// )
-
-export const downVotePostAction = (id) => (dispatch) => (
-  downVotePost(id).then(({ id }) => dispatch(downVotePostSuccess(id)))
-)
+export const downVotePost = (id) => (dispatch) => {
+  api.downVotePost(id)
+    .then(({ id }) => dispatch(downVotePostSuccess(id)));
+}
 
 const downVotePostSuccess = (id) => {
   return {
@@ -110,26 +50,59 @@ const downVotePostSuccess = (id) => {
   }
 }
 
-export const upVoteCommentAction = (id) => dispatch => (
-  voteComment(id, 'upVote')
-    .then((comment) => {
-      dispatch({
-        type: UPVOTE_COMMENT,
-        id: comment.id,
-        parentId: comment.parentId,
-        voteScore: comment.voteScore,
-      })
-    })
-)
+export const getAllComments = (postId) => (dispatch) => {
+  return api.getComments(postId)
+    .then(comments => dispatch(getAllCommentsSuccess(comments)))
+}
 
-export const downVoteCommentAction = (id) => dispatch => (
-  voteComment(id, 'downVote')
-    .then((comment) => {
-      dispatch({
-        type: DOWNVOTE_COMMENT,
-        id: comment.id,
-        parentId: comment.parentId,
-        voteScore: comment.voteScore,
-      })
-    })
-)
+const getAllCommentsSuccess = (comments) => {
+  return {
+    type: GET_ALL_COMMENTS_SUCCESS,
+    comments
+  }
+}
+
+export const upVoteComment = (id) => (dispatch) => {
+  api.upVoteComment(id)
+    .then(({ id }) => dispatch(upVoteCommentSuccess(id)));
+}
+
+const upVoteCommentSuccess = (id) => {
+  return {
+    type: UPVOTE_COMMENT_SUCCESS,
+    id
+  }
+}
+
+export const downVoteComment = (id) => (dispatch) => {
+  api.downVoteComment(id)
+    .then(({ id }) => dispatch(downVoteCommentSuccess(id)));
+}
+
+const downVoteCommentSuccess = (id) => {
+  return {
+    type: DOWNVOTE_COMMENT_SUCCESS,
+    id
+  }
+}
+
+export const getAllCategories = () => (dispatch) => {
+  api.getCategories()
+    .then(categories => dispatch(getAllCategoriesSuccess(categories)))
+}
+
+const getAllCategoriesSuccess = (categories) => {
+  return {
+    type: GET_ALL_CATEGORIES_SUCCESS,
+    categories
+  }
+}
+
+export const setSortBy = (content, sortByType, order) => {
+  return {
+    type: SET_SORT_BY,
+    content,
+    sortByType,
+    order
+  }
+}

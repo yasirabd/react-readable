@@ -12,13 +12,13 @@ class PostListItemInfo extends Component {
 
     return (
       <div className='meta-container'>
-        <AccountCicleIcon />
+        <AccountCicleIcon className='meta-icon' />
         <span className='meta-item'>{author}</span>
-        <AccessTimeIcon />
+        <AccessTimeIcon className='meta-icon' />
         <span className='meta-item'>{dateTimeFormat(date)}</span>
-        <FolderIcon />
+        <FolderIcon className='meta-icon' />
         <span className='meta-item'>{category}</span>
-        <CommentIcon />
+        <CommentIcon className='meta-icon' />
         <span className='meta-item'>{commentCount>1 ? commentCount+" comments" : commentCount+" comment"}</span>
       </div>
     )

@@ -4,19 +4,17 @@ import CommentListItem from './CommentListItem'
 class CommentList extends Component {
 
   render() {
+    const { comments } = this.props
 
-    let commentList = null
-
-    if (this.props.comments) {
-      commentList = this.props.comments.map(comment => (
-        <CommentListItem
-          key={comment.id}
-          comment={comment} />
-      ))
-    }
     return(
       <div>
-        {commentList}
+        {comments.length === 0
+         ? <p><em>No Comments Dude!</em></p>
+         : comments.map(comment =>
+           <CommentListItem
+             key={comment.id}
+             comment={comment}
+           />)}
       </div>
     )
   }
