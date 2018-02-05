@@ -1,0 +1,22 @@
+.post-form-container {
+  padding: 16px;
+}
+
+.body-input {
+  width: 80%;
+}
+
+.small-input {
+  width: 40%;
+}
+
+.category-group {
+  margin-top: 15px;
+  width: 40%;
+}
+
+.post-form-container .submit-btn {
+  margin-top: 20px;
+  flex: 0 0 88px;
+  min-width: 100px;
+}

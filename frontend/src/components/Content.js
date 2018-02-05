@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 
 import PostList from './PostList'
 import PostDetails from './PostDetails'
+import PostForm from './PostForm'
 import { getSortedPostsWithSortedComments } from '../selectors'
 
 class Content extends Component {
@@ -25,6 +26,9 @@ class Content extends Component {
             render={() => (
               <PostList posts={posts} />
             )}
+          />
+          <Route exact path='/posts/new'
+            component={PostForm}
           />
           <Route exact path='/posts/:id'
             render={({ match }) => (

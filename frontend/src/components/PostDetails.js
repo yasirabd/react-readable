@@ -27,7 +27,7 @@ const PostDetails = (props) => {
           />
         </div>
 
-        <Typography type="display2" gutterBottom>
+        <Typography variant="display2" gutterBottom>
           {title}
         </Typography>
 
@@ -38,16 +38,16 @@ const PostDetails = (props) => {
           commentCount={commentCount} />
 
         <div className="post-detail-content">
-          <Typography type="body1" gutterBottom>
+          <Typography variant="body1" gutterBottom>
             {body}
           </Typography>
         </div>
 
         <div className="button-actions">
-          <Button raised color='primary'>
+          <Button variant="raised" color='primary'>
             <ModeEditIcon className='icon-button' /> Edit
           </Button>
-          <Button raised color='secondary'>
+          <Button variant="raised" color='secondary'>
             <DeleteIcon className='icon-button' /> Delete
           </Button>
         </div>

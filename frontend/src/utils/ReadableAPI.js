@@ -1,3 +1,5 @@
+import { v4 } from 'uuid'
+
 const BASE_URL='http://localhost:3001';
 const HEADERS = {
   'Authorization': 'some-auth-token',
@@ -12,34 +14,40 @@ export const getCategories = () => {
     .then(data => data.categories)
 }
 
-// GET /:category/posts
-// get all of the posts for a particular category
-// export const getAllPostsForCategory = (category) => {
-//   return fetch(`${api}/${category}/posts`, { headers })
-//     .then(response => response.json())
-//     .then(data => data)
-// }
 
 // GET /posts
 // get all of the posts
-// export const getAllPosts = () => {
-//   return fetch(`${api}/posts`, { headers })
-//     .then(response => response.json())
-// }
-
-// POST /posts
-// add a new post
-
-// GET /posts/:id
-// get the details of a single post
-// export const getPost = (id) => {
-//   return fetch(`${api}/posts/${id}`, { headers })
-//     .then(response => response.json())
-// }
-
 export const getPosts = () => {
   return fetch(`${BASE_URL}/posts`, { headers: HEADERS })
     .then(res => res.json())
+}
+
+// POST /posts
+// add a new post
+export const createPost = (data) => {
+  return fetch(`${BASE_URL}/posts`,
+    {
+      method: 'POST',
+      header: HEADERS,
+      body: JSON.stringify({
+        ...data,
+        id: v4(),
+        timestamp: Date.now()
+      })
+    }).then(res => res.json())
+}
+
+// PUT /posts/:id
+// edit the details of an existing post
+export const editPost = (id, data) => {
+  return fetch(`${BASE_URL}/posts/${id}`,
+    {
+      method: 'PUT',
+      headers: HEADERS,
+      body: JSON.stringify({
+        ...data
+      })
+    }).then(res => res.json())
 }
 
 // POST /posts/:id
@@ -56,8 +64,6 @@ const votePost = (option) => (id) => {
 export const upVotePost = votePost('upVote');
 export const downVotePost = votePost('downVote');
 
-// PUT /posts/:id
-// edit the details of an existing post
 
 // DELETE /posts/:id
 // Sets the deleted flag for a post to 'true'.

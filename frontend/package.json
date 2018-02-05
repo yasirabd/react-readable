@@ -5,19 +5,22 @@
   "dependencies": {
     "axios": "^0.17.0",
     "date-fns": "^1.29.0",
-    "material-ui": "^1.0.0-beta.21",
+    "material-ui": "^1.0.0-beta.32",
     "material-ui-icons": "^1.0.0-beta.17",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-modal": "^3.1.0",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "1.0.17",
+    "react-scripts": "1.1.0",
     "redux": "^3.7.2",
+    "redux-form": "7.2.3",
+    "redux-form-material-ui": "^5.0.0-beta.2",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
     "reselect": "3.0.1",
-    "styled-components": "^2.2.3"
+    "styled-components": "^3.1.6",
+    "uuid": "3.2.1"
   },
   "scripts": {
     "start": "react-scripts start",

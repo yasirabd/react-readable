@@ -13,6 +13,9 @@ import Toolbar from 'material-ui/Toolbar'
 import Drawer from 'material-ui/Drawer'
 import Typography from 'material-ui/Typography'
 import Divider from 'material-ui/Divider'
+import Tooltip from 'material-ui/Tooltip'
+import Button from 'material-ui/Button'
+import AddIcon from 'material-ui-icons/Add'
 import styled from 'styled-components'
 
 const drawerWidth = '240px'
@@ -37,7 +40,6 @@ const OverrideAppBar = styled(AppBar)`
   margin-left: ${drawerWidth} !important;
   order: 1 !important;
 `
-
 const styles = theme => ({
   drawerPaper: {
     position: 'relative',
@@ -83,19 +85,28 @@ class App extends Component {
           <OverrideAppBar>
             <Toolbar>
               <Link to='/' className='no-decor'>
-                <Typography type='title' noWrap className='app-bar-title'>
+                <Typography variant='title' noWrap className='app-bar-title'>
                   READABLE
                 </Typography>
               </Link>
             </Toolbar>
           </OverrideAppBar>
-          <Drawer type='permanent' classes={{ paper: classes.drawerPaper }}>
+          <Drawer variant='permanent' classes={{ paper: classes.drawerPaper }}>
             <div className={classes.drawerHeader} />
             <Divider />
             <SideNav />
           </Drawer>
           <main className={classes.content}>
             <Content />
+            <div className={classes.addButton}>
+            <Tooltip placement="left" title="Add post" className="tooltip-lg">
+              <Link to="/posts/new">
+                <Button variant="fab" color="primary" aria-label="add">
+                  <AddIcon />
+                </Button>
+              </Link>
+            </Tooltip>
+          </div>
           </main>
         </AppFrame>
       </Root>

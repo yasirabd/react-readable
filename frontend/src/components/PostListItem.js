@@ -22,7 +22,7 @@ const PostListItem = ({ id, title, author, timestamp, category, commentCount, vo
     />
     <div className='list-item-content post'>
       <Link to={`/posts/${id}`} className='no-decor'>
-          <Typography type='headline'>{title}</Typography>
+          <Typography variant='headline'>{title}</Typography>
       </Link>
       <PostListItemInfo
         author={author}
@@ -31,10 +31,10 @@ const PostListItem = ({ id, title, author, timestamp, category, commentCount, vo
         category={category} />
     </div>
     <div className='list-item-actions'>
-      <Button raised color='primary'>
+      <Button variant="raised" color='primary'>
         <ModeEditIcon className='icon-button' /> Edit
       </Button>
-      <Button raised color='secondary'>
+      <Button variant="raised" color='secondary'>
         <DeleteIcon className='icon-button' /> Delete
       </Button>
     </div>

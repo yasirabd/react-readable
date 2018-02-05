@@ -39,10 +39,10 @@ const CommentListItem = ({ id, body, author, timestamp, voteScore, onUpVoteComme
         </div>
       </div>
       <div className='list-item-actions'>
-        <Button raised color='primary'>
+        <Button variant="raised" color='primary'>
           <ModeEditIcon className='icon-button' /> Edit
         </Button>
-        <Button raised color='secondary'>
+        <Button variant="raised" color='secondary'>
           <DeleteIcon className='icon-button' /> Delete
         </Button>
       </div>
