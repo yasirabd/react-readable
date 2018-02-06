@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
-import { upVotePost, downVotePost } from '../actions'
+import { upVotePost, downVotePost, deletePost } from '../actions'
 import VoteUpDown from './VoteUpDown'
 import PostListItemInfo from './PostListItemInfo'
 import CommentList from './CommentList'
@@ -15,7 +15,8 @@ import Divider from 'material-ui/Divider'
 import './PostDetails.css'
 
 const PostDetails = (props) => {
-  const { id, title, body, author, category, timestamp, commentCount, voteScore, comments = [], onUpVotePost, onDownVotePost } = props
+  const { history, id, title, body, author, category, timestamp, commentCount, voteScore, comments = [],
+          onUpVotePost, onDownVotePost, onDeletePost } = props
 
   return (
     <div>
@@ -50,9 +51,16 @@ const PostDetails = (props) => {
               <ModeEditIcon className='icon-button' /> Edit
             </Button>
           </Link>
-          <Button variant="raised" color='secondary'>
-            <DeleteIcon className='icon-button' /> Delete
-          </Button>
+          <Link to='/' className='no-decor' onClick={(event) => {
+            console.log(id)
+            event.preventDefault()
+            onDeletePost(id)
+            history.push('/')
+          }}>
+            <Button variant="raised" color='secondary'>
+              <DeleteIcon className='icon-button' /> Delete
+            </Button>
+          </Link>
         </div>
       </div>
       <Divider />
@@ -63,7 +71,9 @@ const PostDetails = (props) => {
   )
 }
 
-export default connect(
+export default withRouter(connect(
   undefined,
-  { onUpVotePost: upVotePost, onDownVotePost: downVotePost }
-)(PostDetails)
+  { onUpVotePost: upVotePost,
+    onDownVotePost: downVotePost,
+    onDeletePost: deletePost }
+)(PostDetails))

@@ -1,8 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
+
 import VoteUpDown from './VoteUpDown'
-import { upVotePost, downVotePost } from '../actions'
+import { upVotePost, downVotePost, deletePost } from '../actions'
 
 import Paper from 'material-ui/Paper'
 import Typography from 'material-ui/Typography'
@@ -13,9 +14,8 @@ import './PostListItem.css'
 
 import PostListItemInfo from './PostListItemInfo'
 
-const required = value => (value == null ? 'Required' : undefined);
-
-const PostListItem = ({ id, title, author, timestamp, category, commentCount, voteScore, onUpVotePost, onDownVotePost }) => (
+const PostListItem = ({ type, history, id, title, author, timestamp, category, commentCount, voteScore,
+                        onUpVotePost, onDownVotePost, onDeletePost }) => (
   <Paper className='list-item-container post-list-item-container'>
     <VoteUpDown
       onUpVote={() => onUpVotePost(id)}
@@ -38,15 +38,24 @@ const PostListItem = ({ id, title, author, timestamp, category, commentCount, vo
           <ModeEditIcon className='icon-button' /> Edit
         </Button>
       </Link>
-      <Button variant="raised" color='secondary'>
-        <DeleteIcon className='icon-button' /> Delete
-      </Button>
+      <Link to='/' className='no-decor' onClick={(event) => {
+        console.log(id)
+        event.preventDefault()
+        onDeletePost(id)
+        history.push('/')
+      }}>
+        <Button variant="raised" color='secondary'>
+          <DeleteIcon className='icon-button' /> Delete
+        </Button>
+      </Link>
+
     </div>
   </Paper>
 )
 
-
-export default connect(
+export default withRouter(connect(
   undefined,
-  { onUpVotePost: upVotePost, onDownVotePost: downVotePost }
-)(PostListItem)
+  { onUpVotePost: upVotePost,
+    onDownVotePost: downVotePost,
+    onDeletePost: deletePost }
+)(PostListItem))

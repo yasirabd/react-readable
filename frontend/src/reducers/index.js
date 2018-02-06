@@ -41,10 +41,14 @@ const posts = (state = [], action) => {
         action.post
       ];
     case 'EDIT_POST_SUCCESS':
-      return state.map(p => post(p, action));
+      return state.map(p => post(p, action))
+    case 'DELETE_POST_SUCCESS':
+      return [
+        ...state.filter(post => post.id !== action.id)
+      ]
     case 'UPVOTE_POST_SUCCESS':
     case 'DOWNVOTE_POST_SUCCESS':
-      return state.map(p => post(p, action));
+      return state.map(p => post(p, action))
     default:
       return state;
   }

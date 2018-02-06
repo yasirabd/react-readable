@@ -49,6 +49,17 @@ export const editPost = (id, data) => {
     }).then(res => res.json())
 }
 
+// DELETE /posts/:id
+// Sets the deleted flag for a post to 'true'.
+// Sets the parentDeleted flag for all child comments to 'true'.
+export const deletePost = (id) => {
+  return fetch(`${BASE_URL}/posts/${id}`,
+    {
+      method: 'DELETE',
+      headers: HEADERS,
+    })
+}
+
 // POST /posts/:id
 // used for voting on a post
 const votePost = (option) => (id) => {
@@ -62,11 +73,6 @@ const votePost = (option) => (id) => {
 
 export const upVotePost = votePost('upVote');
 export const downVotePost = votePost('downVote');
-
-
-// DELETE /posts/:id
-// Sets the deleted flag for a post to 'true'.
-// Sets the parentDeleted flag for all child comments to 'true'.
 
 // GET /posts/:id/comments
 // get all the comments for a single post

@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.17.0",
     "date-fns": "^1.29.0",
+    "history": "^4.7.2",
     "material-ui": "^1.0.0-beta.32",
     "material-ui-icons": "^1.0.0-beta.17",
     "react": "^16.0.0",

@@ -4,6 +4,7 @@ import { wait } from '../utils/helper'
 export const GET_ALL_POSTS_SUCCESS = "GET_ALL_POSTS_SUCCESS"
 export const CREATE_POST_SUCCESS = "CREATE_POST_SUCCESS"
 export const EDIT_POST_SUCCESS = "EDIT_POST_SUCCESS"
+export const DELETE_POST_SUCCESS = "DELETE_POST_SUCCESS"
 export const UPVOTE_POST_SUCCESS = "UPVOTE_POST_SUCCESS"
 export const DOWNVOTE_POST_SUCCESS = "DOWNVOTE_POST_SUCCESS"
 export const GET_ALL_COMMENTS_SUCCESS = "GET_ALL_COMMENTS_SUCCESS"
@@ -42,13 +43,25 @@ const createPostSuccess = (post) => {
 
 export const editPost = (id, data) => (dispatch) => {
   api.editPost(id, data)
-    .then((post) => dispatch(editPostSuccess(post)));
+    .then((post) => dispatch(editPostSuccess(post)))
 }
 
 const editPostSuccess = (post) => {
   return {
     type: EDIT_POST_SUCCESS,
     post
+  }
+}
+
+export const deletePost = (id) => (dispatch) => {
+  api.deletePost(id)
+    .then(() => dispatch(deletePostSuccess(id)))
+}
+
+const deletePostSuccess = (id) => {
+  return {
+    type: DELETE_POST_SUCCESS,
+    id
   }
 }
 
