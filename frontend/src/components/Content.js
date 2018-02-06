@@ -30,6 +30,12 @@ class Content extends Component {
           <Route exact path='/posts/new'
             component={PostForm}
           />
+          <Route exact
+            path='/posts/edit/:id'
+            render={({ match }) => (
+              <PostForm initialValues={this.filterPostById(posts, match.params.id)} />
+            )}
+          />
           <Route exact path='/posts/:id'
             render={({ match }) => (
               <PostDetails {...this.filterPostById(posts, match.params.id)} />

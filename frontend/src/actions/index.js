@@ -30,7 +30,7 @@ const getAllPostsSuccess = (posts) => {
 
 export const createPost = (data) => (dispatch) => {
   api.createPost(data)
-    .then(post => dispatch(createPostSuccess(post)))
+    .then(post => dispatch(createPostSuccess(post)));
 }
 
 const createPostSuccess = (post) => {

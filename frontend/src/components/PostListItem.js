@@ -13,6 +13,8 @@ import './PostListItem.css'
 
 import PostListItemInfo from './PostListItemInfo'
 
+const required = value => (value == null ? 'Required' : undefined);
+
 const PostListItem = ({ id, title, author, timestamp, category, commentCount, voteScore, onUpVotePost, onDownVotePost }) => (
   <Paper className='list-item-container post-list-item-container'>
     <VoteUpDown
@@ -31,9 +33,11 @@ const PostListItem = ({ id, title, author, timestamp, category, commentCount, vo
         category={category} />
     </div>
     <div className='list-item-actions'>
-      <Button variant="raised" color='primary'>
-        <ModeEditIcon className='icon-button' /> Edit
-      </Button>
+      <Link to={`/posts/edit/${id}`} className='no-decor'>
+        <Button variant="raised" color='primary'>
+          <ModeEditIcon className='icon-button' /> Edit
+        </Button>
+      </Link>
       <Button variant="raised" color='secondary'>
         <DeleteIcon className='icon-button' /> Delete
       </Button>

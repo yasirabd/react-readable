@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 import { upVotePost, downVotePost } from '../actions'
 import VoteUpDown from './VoteUpDown'
@@ -44,9 +45,11 @@ const PostDetails = (props) => {
         </div>
 
         <div className="button-actions">
-          <Button variant="raised" color='primary'>
-            <ModeEditIcon className='icon-button' /> Edit
-          </Button>
+          <Link to={`/posts/edit/${id}`} className='no-decor'>
+            <Button variant="raised" color='primary'>
+              <ModeEditIcon className='icon-button' /> Edit
+            </Button>
+          </Link>
           <Button variant="raised" color='secondary'>
             <DeleteIcon className='icon-button' /> Delete
           </Button>

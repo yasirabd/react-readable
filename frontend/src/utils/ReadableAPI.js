@@ -1,6 +1,6 @@
 import { v4 } from 'uuid'
 
-const BASE_URL='http://localhost:3001';
+export const BASE_URL='http://localhost:3001';
 const HEADERS = {
   'Authorization': 'some-auth-token',
   'Content-Type': 'application/json'
@@ -13,7 +13,6 @@ export const getCategories = () => {
     .then(res => res.json())
     .then(data => data.categories)
 }
-
 
 // GET /posts
 // get all of the posts
@@ -28,7 +27,7 @@ export const createPost = (data) => {
   return fetch(`${BASE_URL}/posts`,
     {
       method: 'POST',
-      header: HEADERS,
+      headers: HEADERS,
       body: JSON.stringify({
         ...data,
         id: v4(),
