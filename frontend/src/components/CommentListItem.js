@@ -13,7 +13,8 @@ import DeleteIcon from 'material-ui-icons/Delete'
 import Button from 'material-ui/Button'
 import './CommentListItem.css'
 
-const CommentListItem = ({ id, body, author, timestamp, voteScore, onUpVoteComment, onDownVoteComment }) => {
+const CommentListItem = ({ id, body, author, timestamp, voteScore,
+                           onUpVoteComment, onDownVoteComment, showForm }) => {
   return (
     <Paper className='list-item-container'>
       <VoteUpDown
@@ -39,7 +40,7 @@ const CommentListItem = ({ id, body, author, timestamp, voteScore, onUpVoteComme
         </div>
       </div>
       <div className='list-item-actions'>
-        <Button variant="raised" color='primary'>
+        <Button variant="raised" color='primary' onClick={showForm}>
           <ModeEditIcon className='icon-button' /> Edit
         </Button>
         <Button variant="raised" color='secondary'>

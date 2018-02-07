@@ -64,11 +64,11 @@ export const deletePost = (id) => {
 // used for voting on a post
 const votePost = (option) => (id) => {
   return fetch(`${BASE_URL}/posts/${id}`,
-  {
-    method: 'POST',
-    headers: HEADERS,
-    body: JSON.stringify({ option })
-  }).then(res => res.json());
+    {
+      method: 'POST',
+      headers: HEADERS,
+      body: JSON.stringify({ option })
+    }).then(res => res.json());
 }
 
 export const upVotePost = votePost('upVote');
@@ -83,6 +83,33 @@ export const getComments = (postId) => {
 
 // POST /comments
 // add a comment to a post
+export const createComment = (parentId, data) => {
+  return fetch(`${BASE_URL}/comments`,
+    {
+      method: 'POST',
+      headers: HEADERS,
+      body: JSON.stringify({
+        ...data,
+        parentId,
+        id: v4(),
+        timestamp: Date.now()
+      })
+    }).then(res => res.json())
+}
+
+// PUT /comments/:id
+// edit the details of an existing comment
+export const editComment = (id, data) => {
+  return fetch(`${BASE_URL}/comments/${id}`,
+    {
+      method: 'PUT',
+      headers: HEADERS,
+      body: JSON.stringify({
+        ...data,
+        timestamp: Date.now()
+      })
+    }).then(res => res.json())
+}
 
 // GET /comments/:id
 // get the details of a single comment
@@ -91,19 +118,15 @@ export const getComments = (postId) => {
 // used fot voting on a comment
 const voteComment = (option) => (commentId) => {
   return fetch(`${BASE_URL}/comments/${commentId}`,
-  {
-    method: 'POST',
-    headers: HEADERS,
-    body: JSON.stringify({ option })
-  })
-    .then(res => res.json());
+    {
+      method: 'POST',
+      headers: HEADERS,
+      body: JSON.stringify({ option })
+    }).then(res => res.json())
 }
 
 export const upVoteComment = voteComment('upVote');
 export const downVoteComment = voteComment('downVote');
-
-// PUT /comments/:id
-// edit the details of an existing comment
 
 // DELETE /comments/:id
 // sets a comment's deleted flat to true

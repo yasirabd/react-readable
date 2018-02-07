@@ -56,6 +56,13 @@ const posts = (state = [], action) => {
 
 const comment = (state = {}, action) => {
   switch(action.type) {
+    case 'EDIT_COMMENT_SUCCESS':
+      if (state.id !== action.comment.id) {
+        return state
+      }
+      return {
+        ...action.comment
+      }
     case 'UPVOTE_COMMENT_SUCCESS':
       if (state.id !== action.id) {
         return state
@@ -84,6 +91,13 @@ const comments = (state = [], action) => {
         ...state,
         ...action.comments,
       ]
+    case 'CREATE_COMMENT_SUCCESS':
+      return [
+        ...state,
+        action.comment
+      ]
+    case 'EDIT_COMMENT_SUCCESS':
+      return state.map(c => comment(c, action))
     case 'UPVOTE_COMMENT_SUCCESS':
     case 'DOWNVOTE_COMMENT_SUCCESS':
       return state.map(c => comment(c, action))

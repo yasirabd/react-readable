@@ -65,8 +65,13 @@ const PostDetails = (props) => {
       </div>
       <Divider />
       <div className='post-detail-comment-list'>
+        <Typography variant="display1" gutterBottom>
+          Comments
+        </Typography>
+
         <CommentList postId={id} comments={comments} />
       </div>
+      <Divider />
     </div>
   )
 }
