@@ -98,6 +98,10 @@ const comments = (state = [], action) => {
       ]
     case 'EDIT_COMMENT_SUCCESS':
       return state.map(c => comment(c, action))
+    case 'DELETE_COMMENT_SUCCESS':
+      return [
+        ...state.filter(comment => comment.id !== action.id)
+      ]
     case 'UPVOTE_COMMENT_SUCCESS':
     case 'DOWNVOTE_COMMENT_SUCCESS':
       return state.map(c => comment(c, action))

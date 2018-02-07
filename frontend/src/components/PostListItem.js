@@ -39,7 +39,6 @@ const PostListItem = ({ type, history, id, title, author, timestamp, category, c
         </Button>
       </Link>
       <Link to='/' className='no-decor' onClick={(event) => {
-        console.log(id)
         event.preventDefault()
         onDeletePost(id)
         history.push('/')

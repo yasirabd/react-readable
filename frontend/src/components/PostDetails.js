@@ -68,7 +68,6 @@ const PostDetails = (props) => {
         <Typography variant="display1" gutterBottom>
           Comments
         </Typography>
-
         <CommentList postId={id} comments={comments} />
       </div>
       <Divider />

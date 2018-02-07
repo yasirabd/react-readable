@@ -10,6 +10,7 @@ export const DOWNVOTE_POST_SUCCESS = "DOWNVOTE_POST_SUCCESS"
 export const GET_ALL_COMMENTS_SUCCESS = "GET_ALL_COMMENTS_SUCCESS"
 export const CREATE_COMMENT_SUCCESS = "CREATE_COMMENT_SUCCESS"
 export const EDIT_COMMENT_SUCCESS = "EDIT_COMMENT_SUCCESS"
+export const DELETE_COMMENT_SUCCESS = "DELETE_COMMENT_SUCCESS"
 export const UPVOTE_COMMENT_SUCCESS = "UPVOTE_COMMENT_SUCCESS"
 export const DOWNVOTE_COMMENT_SUCCESS = "DOWNVOTE_COMMENT_SUCCESS"
 export const GET_ALL_CATEGORIES_SUCCESS = "GET_ALL_CATEGORIES_SUCCESS"
@@ -124,6 +125,18 @@ const editCommentSuccess = (comment) => {
   return {
     type: EDIT_COMMENT_SUCCESS,
     comment
+  }
+}
+
+export const deleteComment = (id) => (dispatch) => {
+  api.deleteComment(id)
+    .then(() => dispatch(deleteCommentSuccess(id)))
+}
+
+const deleteCommentSuccess = (id) => {
+  return {
+    type: DELETE_COMMENT_SUCCESS,
+    id
   }
 }
 

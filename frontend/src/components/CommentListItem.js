@@ -1,9 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Link, withRouter } from 'react-router-dom'
 
 import VoteUpDown from './VoteUpDown'
 import { dateTimeFormat } from '../utils/date'
-import { upVoteComment, downVoteComment } from '../actions'
+import { upVoteComment, downVoteComment, deleteComment } from '../actions'
 
 import Paper from 'material-ui/Paper'
 import AccountCircleIcon from 'material-ui-icons/AccountCircle'
@@ -14,7 +15,7 @@ import Button from 'material-ui/Button'
 import './CommentListItem.css'
 
 const CommentListItem = ({ id, body, author, timestamp, voteScore,
-                           onUpVoteComment, onDownVoteComment, showForm }) => {
+                           onUpVoteComment, onDownVoteComment, onDeleteComment, showForm }) => {
   return (
     <Paper className='list-item-container'>
       <VoteUpDown
@@ -43,15 +44,23 @@ const CommentListItem = ({ id, body, author, timestamp, voteScore,
         <Button variant="raised" color='primary' onClick={showForm}>
           <ModeEditIcon className='icon-button' /> Edit
         </Button>
-        <Button variant="raised" color='secondary'>
-          <DeleteIcon className='icon-button' /> Delete
-        </Button>
+        <Link to='/' className='no-decor' onClick={(event)=> {
+            event.preventDefault()
+            onDeleteComment(id)
+          }}
+        >
+          <Button variant="raised" color='secondary'>
+            <DeleteIcon className='icon-button' /> Delete
+          </Button>
+        </Link>
       </div>
     </Paper>
   )
 }
 
-export default connect(
+export default withRouter(connect(
   undefined,
-  { onUpVoteComment: upVoteComment, onDownVoteComment: downVoteComment }
-)(CommentListItem)
+  { onUpVoteComment: upVoteComment,
+    onDownVoteComment: downVoteComment,
+    onDeleteComment: deleteComment }
+)(CommentListItem))

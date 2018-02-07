@@ -111,8 +111,15 @@ export const editComment = (id, data) => {
     }).then(res => res.json())
 }
 
-// GET /comments/:id
-// get the details of a single comment
+// DELETE /comments/:id
+// sets a comment's deleted flat to true
+export const deleteComment = (id) => {
+  return fetch(`${BASE_URL}/comments/${id}`,
+    {
+      method: 'DELETE',
+      headers: HEADERS
+    })
+}
 
 // POST /comments/:id
 // used fot voting on a comment
@@ -127,6 +134,3 @@ const voteComment = (option) => (commentId) => {
 
 export const upVoteComment = voteComment('upVote');
 export const downVoteComment = voteComment('downVote');
-
-// DELETE /comments/:id
-// sets a comment's deleted flat to true
