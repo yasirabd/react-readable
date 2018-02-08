@@ -14,7 +14,7 @@ import './PostListItem.css'
 
 import PostListItemInfo from './PostListItemInfo'
 
-const PostListItem = ({ type, history, id, title, author, timestamp, category, commentCount, voteScore,
+const PostListItem = ({ type, history, id, title, author, timestamp, category, comments=[], voteScore,
                         onUpVotePost, onDownVotePost, onDeletePost }) => (
   <Paper className='list-item-container post-list-item-container'>
     <VoteUpDown
@@ -29,7 +29,7 @@ const PostListItem = ({ type, history, id, title, author, timestamp, category, c
       <PostListItemInfo
         author={author}
         date={timestamp}
-        commentCount={commentCount}
+        commentCount={comments.length}
         category={category} />
     </div>
     <div className='list-item-actions'>

@@ -15,7 +15,7 @@ import Divider from 'material-ui/Divider'
 import './PostDetails.css'
 
 const PostDetails = (props) => {
-  const { history, id, title, body, author, category, timestamp, commentCount, voteScore, comments = [],
+  const { history, id, title, body, author, category, timestamp, voteScore, comments = [],
           onUpVotePost, onDownVotePost, onDeletePost } = props
 
   return (
@@ -37,7 +37,7 @@ const PostDetails = (props) => {
           author={author}
           date={timestamp}
           category={category}
-          commentCount={commentCount} />
+          commentCount={comments.length} />
 
         <div className="post-detail-content">
           <Typography variant="body1" gutterBottom>
