@@ -1,5 +1,6 @@
 import React from 'react'
 import PostListItem from './PostListItem'
+import SortSelect from './SortSelect'
 
 const conditionalRender = (WrappedComponent) => ({ posts, ...props }) => (
   posts.length === 0
@@ -15,9 +16,10 @@ const conditionalRender = (WrappedComponent) => ({ posts, ...props }) => (
 
 const PostList = ({ children }) => (
   <div>
-    <ul>
-      {children}
-    </ul>
+    <div>
+      <SortSelect content={'posts'} />
+    </div>
+    {children}
   </div>
 )
 

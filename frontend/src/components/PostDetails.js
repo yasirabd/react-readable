@@ -70,7 +70,6 @@ const PostDetails = (props) => {
         </Typography>
         <CommentList postId={id} comments={comments} />
       </div>
-      <Divider />
     </div>
   )
 }

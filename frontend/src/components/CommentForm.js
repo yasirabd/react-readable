@@ -8,8 +8,7 @@ import ClearIcon from 'material-ui-icons/Clear'
 import SaveIcon from 'material-ui-icons/Save'
 import Button from 'material-ui/Button'
 import {
-  TextField,
-  Select
+  TextField
 } from 'redux-form-material-ui'
 
 const required = value => (value == null ? 'Required' : undefined);

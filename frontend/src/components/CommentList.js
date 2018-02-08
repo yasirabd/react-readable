@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import CommentListItem from './CommentListItem'
 import CommentForm from './CommentForm'
+import SortSelect from './SortSelect'
 
 import Button from 'material-ui/Button'
 import AddIcon from 'material-ui-icons/Add'
-import Divider from 'material-ui/Divider'
 import './CommentList.css'
 
 class CommentList extends Component {
@@ -58,6 +58,7 @@ class CommentList extends Component {
             />
           }
         </div>
+        <SortSelect content={'comments'} />
         <div>
           {comments.length === 0
            ? <p><em>No Comments Dude!</em></p>
