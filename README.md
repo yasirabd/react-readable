@@ -11,7 +11,7 @@ Clone this repository.
 - `npm install`
 - `npm start`
 
-### Installing Server
+### Installing Client
 - `cd frontend`
 - `npm install`
 - `npm start`
