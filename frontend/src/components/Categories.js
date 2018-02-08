@@ -28,7 +28,7 @@ const Categories = ({ location, categories }) => (
     {categories.map((category, index) => (
       <div key={index}>
         {location.pathname === `/categories/${category.name}`
-         ? <Link to={`/categories/${category.name}`} className='menu-item'>
+         ? <Link to={`/${category.name}`} className='menu-item'>
              <ListItem button>
                <Avatar>
                  <FolderIcon />
@@ -36,7 +36,7 @@ const Categories = ({ location, categories }) => (
                <ListItemText primary={category.name} />
              </ListItem>
            </Link>
-         : <Link to={`/categories/${category.name}`} className='menu-item'>
+         : <Link to={`/${category.name}`} className='menu-item'>
              <ListItem button>
                <Avatar>
                  <FolderIcon />
