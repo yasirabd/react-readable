@@ -47,7 +47,6 @@ const PostListItem = ({ type, history, id, title, author, timestamp, category, c
           <DeleteIcon className='icon-button' /> Delete
         </Button>
       </Link>
-
     </div>
   </Paper>
 )

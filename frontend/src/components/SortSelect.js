@@ -7,7 +7,6 @@ import Select from 'material-ui/Select'
 import { MenuItem } from 'material-ui/Menu'
 
 const SortSelect = ({ content, sortBy, onSelectSortBy }) => {
-  console.log(content)
   const getValueFromParams = ({ [content]: { type, order } }) => `${type}-${order}`
   const getParamsFromValue = (value) => value.split('-')
 

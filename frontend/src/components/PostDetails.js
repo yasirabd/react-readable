@@ -28,23 +28,19 @@ const PostDetails = (props) => {
             voteScore={voteScore}
           />
         </div>
-
         <Typography variant="display2" gutterBottom>
           {title}
         </Typography>
-
         <PostListItemInfo
           author={author}
           date={timestamp}
           category={category}
           commentCount={comments.length} />
-
         <div className="post-detail-content">
           <Typography variant="body1" gutterBottom>
             {body}
           </Typography>
         </div>
-
         <div className="button-actions">
           <Link to={`/posts/edit/${id}`} className='no-decor'>
             <Button variant="raised" color='primary'>
@@ -52,7 +48,6 @@ const PostDetails = (props) => {
             </Button>
           </Link>
           <Link to='/' className='no-decor' onClick={(event) => {
-            console.log(id)
             event.preventDefault()
             onDeletePost(id)
             history.push('/')
